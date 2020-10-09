@@ -51,7 +51,7 @@ pub fn module<'a>(context: &'a Context) -> Option<Module<'a>> {
                 .unwrap_or_else(|| contract_path(current_dir, &home_dir, HOME_SYMBOL))
         }
         // Contract the path to the home directory
-        _ => contract_path(current_dir, &home_dir, HOME_SYMBOL),
+        _ => if config.use_home_symbol {contract_path(current_dir, &home_dir, HOME_SYMBOL)}else{current_dir.to_slash().unwrap()},
     };
     log::debug!("Dir string: {}", dir_string);
 
